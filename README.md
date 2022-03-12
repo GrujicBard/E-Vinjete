@@ -1,1 +1,4 @@
 # E-Vinjete
+Razvili bomo elektronski vinjetni cestninski sistem pri predmetu IT Arhitekture.
+## Opis domene
+E-vinjeta je sodoben način plačevanja cestnine za motorna vozila z največjo dovoljeno maso do 3500 kilogramov. Osnovne značilnosti e-vinjete se od klasične vinjete v obliki nalepke bistveno ne razlikujejo. To pomeni, da si tudi z nakupom e-vinjete zagotovite pravico do uporabe vseh avtocest in hitrih cest v Republiki Sloveniji za čas veljavnosti e-vinjete in torej ne gre za cestninjenje po prevoženi razdalji. E-vinjeta je vezana na registrsko številko vozila, ki se ob nakupu e-vinjete vnese v centralni cestninski sistem. Vozilo brez veljavne e-vinjete ne sme zapeljati na cestninsko cesto.
