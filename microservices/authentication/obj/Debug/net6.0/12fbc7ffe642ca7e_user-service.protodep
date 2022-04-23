@@ -1,0 +1,2 @@
+obj\Debug\net6.0\Protos/User-serviceGrpc.cs \
+obj\Debug\net6.0\Protos/UserService.cs: Protos/user-service.proto
