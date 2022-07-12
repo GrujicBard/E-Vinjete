@@ -1,0 +1,71 @@
+﻿@page
+@model vignette_frontend.Pages.AccountModel
+@{
+}
+<h1>Account</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <th scope="row">First Name:</th>
+                    <td id="first_name">first name</td>
+                </tr>
+                <tr>
+                    <th scope="row">Last Name:</th>
+                    <td id="last_name">last name</td>
+                </tr>
+                <tr>
+                    <th scope="row">Email:</th>
+                    <td id="email">email</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <br />
+        <h4>Update password:</h4>
+        <br />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UpdatePassword.OldPassword" class="control-label"></label>
+                <input asp-for="UpdatePassword.OldPassword" class="form-control" />
+                <span asp-validation-for="UpdatePassword.OldPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdatePassword.NewPassword" class="control-label"></label>
+                <input asp-for="UpdatePassword.NewPassword" class="form-control" />
+                <span asp-validation-for="UpdatePassword.NewPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-light" asp-page-handler="Submit" />
+            </div>
+        </form>
+        <div class="d-none">
+            <input asp-for="StatusMessage" />
+        </div>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <script>alert("@Model.StatusMessage");</script>
+}
+
+@if (Model.User != null)
+{
+    <script>
+        document.getElementById("first_name").innerHTML = "@Model.User.FirstName"
+        document.getElementById("last_name").innerHTML = "@Model.User.LastName"
+        document.getElementById("email").innerHTML = "@Model.User.Email"
+    </script>
+}

@@ -1,0 +1,83 @@
+﻿@page
+@model vignette_frontend.Pages.VignettesModel
+@{
+}
+<h1>My Vignettes</h1>
+
+<hr />
+
+<div class="row">
+    <div id="show_vignettes" class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Registration</th>
+                    <th scope="col">Car Type</th>
+                    <th scope="col">Date Created</th>
+                    <th scope="col">Date Valid</th>
+                </tr>
+            </thead>
+            <tbody id="vignettes_tbody">
+            </tbody>
+        </table>
+        <br />
+        <button type="button" class="btn btn-light" onclick="    hideDiv('input_vignettes'); hideDiv('show_vignettes'); ">Purchase Vignette</button>
+    </div>
+    <div id="input_vignettes" class="col-md-4" style="display:none">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Vignette.registration" class="control-label"></label>
+                <input asp-for="Vignette.registration" class="form-control" />
+                <span asp-validation-for="Vignette.registration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input style="display:none" id="input_carType" asp-for="Vignette.type" class="form-control" />
+                <span asp-validation-for="Vignette.type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="car_type" class="form-label">Car Type</label>
+                <select class="form-control" name="car_type" id="car_type" onchange="setCarType(event)">
+                    <option disabled selected>Select car type</option>
+                    <option value="1">1</option>
+                    <option value="2A">2A</option>
+                    <option value="2B">2B</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input style="display:none" id="input_vigType" asp-for="Vig_Type" class="form-control" />
+                <span asp-validation-for="Vig_Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="vig_type" class="form-label">Vignette Type</label>
+                <select class="form-control" name="vig_type" id="vig_type" onchange="setVigType(event)">
+                    <option disabled selected>Select vignette type</option>
+                    <option value="0">Weekly</option>
+                    <option value="1">Semi-annual</option>
+                    <option value="2">Annual</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Purchase Vignette" class="btn btn-light" asp-page-handler="Submit" />
+            </div>
+            <button type="button" class="btn btn-light" onclick="    hideDiv('input_vignettes'); hideDiv('show_vignettes'); ">Back</button>
+        </form>
+        <div class="d-none">
+            <input asp-for="StatusMessage" />
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <script>alert("@Model.StatusMessage");</script>
+    }
+    @if (Model.Vignettes != null)
+    {
+        <script>
+            var javascriptArray = @Html.Raw(Json.Serialize(Model.Vignettes));
+            fillVignettesTable(javascriptArray)
+        </script>
+    }
+}

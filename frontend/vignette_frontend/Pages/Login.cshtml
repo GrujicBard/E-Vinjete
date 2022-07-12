@@ -1,0 +1,39 @@
+﻿@page "/"
+@model vignette_frontend.Pages.LoginModel
+@{
+    Layout = "/Pages/Shared/_LayoutStart.cshtml";
+}
+<h1>Login</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Credential.Email" class="control-label"></label>
+                <input asp-for="Credential.Email" class="form-control" />
+                <span asp-validation-for="Credential.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Credential.Password" class="control-label"></label>
+                <input asp-for="Credential.Password" class="form-control" />
+                <span asp-validation-for="Credential.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-light" asp-page-handler="Submit"/>
+            </div>
+        </form>
+        <div class="d-none">
+           <input asp-for="StatusMessage"/>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Registration"><u>Registration</u></a>
+</div>
+
+@if(!string.IsNullOrEmpty(Model.StatusMessage)) {
+    <script>alert("@Model.StatusMessage");</script>
+}

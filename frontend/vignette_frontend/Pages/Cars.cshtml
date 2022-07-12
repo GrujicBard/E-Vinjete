@@ -1,0 +1,86 @@
+﻿@page
+@model vignette_frontend.Pages.CarsModel
+@{
+}
+<h1>My Cars</h1>
+
+<hr />
+
+<div class="row">
+    <div id="show_cars" class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Registration</th>
+                    <th scope="col">Car Type</th>
+                    <th scope="col">Manufacturer</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Country</th>
+                </tr>
+            </thead>
+            <tbody id="cars_tbody">
+            </tbody>
+        </table>
+        <br />
+        <button type="button" class="btn btn-light" onclick="    hideDiv('input_cars'); hideDiv('show_cars'); ">Add New Car</button>
+    </div>
+    <div id="input_cars" class="col-md-4" style="display:none">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Car.Registration" class="control-label"></label>
+                <input asp-for="Car.Registration" class="form-control" />
+                <span asp-validation-for="Car.Registration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input style="display:none" id="input_carType" asp-for="Car.Type" class="form-control" />
+                <span asp-validation-for="Car.Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="car_type" class="form-label">Car Type</label>
+                <select class="form-control" name="car_type" id="car_type" onchange="setCarType(event)">
+                    <option disabled selected>Select car type</option>
+                    <option value="1">1</option>
+                    <option value="2A">2A</option>
+                    <option value="2B">2B</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.Manufacturer" class="control-label"></label>
+                <input asp-for="Car.Manufacturer" class="form-control" />
+                <span asp-validation-for="Car.Manufacturer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.Model" class="control-label"></label>
+                <input asp-for="Car.Model" class="form-control" />
+                <span asp-validation-for="Car.Model" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.Country" class="control-label"></label>
+                <input asp-for="Car.Country" class="form-control" />
+                <span asp-validation-for="Car.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add Car" class="btn btn-light" asp-page-handler="Submit" />
+            </div>
+            <button type="button" class="btn btn-light" onclick="    hideDiv('input_cars'); hideDiv('show_cars'); ">Back</button>
+        </form>
+        <div class="d-none">
+            <input asp-for="StatusMessage" />
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @if (Model.Cars != null)
+    {
+        <script>
+            var javascriptArray = @Html.Raw(Json.Serialize(Model.Cars));
+            fillCarsTable(javascriptArray)
+        </script>
+    }
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <script>alert("@Model.StatusMessage");</script>
+    }
+}

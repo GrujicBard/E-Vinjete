@@ -1,0 +1,89 @@
+syntax = "proto3";
+option csharp_namespace = "VignetteAuth.Protos";
+
+message Car {
+	string id = 1;
+	string name = 2;
+	string type = 3;
+	string registration = 4;
+	string manufacturer = 5;
+	string model = 6;
+	string country = 7;
+}
+
+message User {
+	string id = 1;
+	string firstName = 2;
+	string lastName = 3;
+	string email = 4;
+	string password = 5;
+	repeated Car cars = 6;
+}
+
+service UserService {
+	rpc GetUsers(VoidRequest) returns (ReturnUsers);
+	rpc GetUser(ReturnId) returns (ReturnUser);
+	rpc GetUserByEmail(ReturnEmail) returns (ReturnUser);
+	rpc CreateOrUpdateUser (ReturnUser) returns (ReturnResult);
+	rpc DeleteUser(ReturnId) returns(ReturnResult);
+	rpc CreateOrUpdateUserCar(ReturnUSerIdWithCar) returns(ReturnResult);
+	rpc DeleteUserCar(ReturnUSerIdCarId) returns(ReturnResult);
+	rpc GetCarByReg(ReturnReg) returns (ReturnCar);
+	rpc GetCars(VoidRequest) returns (ReturnCars);
+}
+
+message VoidRequest {}
+
+message ReturnId {
+	string id = 1;
+}
+
+message ReturnEmail {
+	string email = 1;
+}
+
+message ReturnUser {
+	User user = 1;
+	string error = 2;
+	string log = 3;
+}
+
+message ReturnUsers {
+	repeated User users = 1;
+	string error = 2;
+	string log = 3;
+}
+
+message ReturnResult {
+	bool success = 1;
+	string error = 2;
+	string log = 3;
+}
+
+message ReturnUSerIdWithCar {
+	string userId = 1;
+	Car car = 2;
+}
+
+message ReturnUSerIdCarId {
+	string userId = 1;
+	string carId = 2;
+}
+
+message ReturnCar {
+	Car car = 1;
+	string error = 2;
+	string log = 3;
+}
+
+message ReturnCars {
+	repeated Car cars = 1;
+	string error = 2;
+	string log = 3;
+}
+
+message ReturnReg{
+	string registration = 1;
+}
+
+
